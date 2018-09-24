@@ -19,7 +19,12 @@
  */
 package paystation.domain;
 
+import java.util.Map;
+
 public interface PayStation {
+
+    
+            public Map<Integer, Integer> getMap();
 
     /**
      * Insert coin into the pay station and adjust state accordingly.
@@ -28,6 +33,9 @@ public interface PayStation {
      * is, a quarter is coinValue=25, etc.
      * @throws IllegalCoinException in case coinValue is not a valid coin value
      */
+    
+
+            
     public void addPayment(int coinValue) throws IllegalCoinException;
 
     /**
@@ -46,8 +54,22 @@ public interface PayStation {
      */
     public Receipt buy();
 
-    /**
-     * Cancel the present transaction. Resets the machine for a new transaction.
-     */
-    public void cancel();
+/** Cancel the present transaction. Resets the paystation for a 
+* new transaction. 
+* @return A Map defining the coins returned to the user. 
+* The key is the coin type and the associated value is the 
+* number of these coins that are returned. 
+* The Map object is never null even if no coins are returned. 
+* The Map will only contain only keys for coins to be returned. 
+* The Map will be cleared after a cancel or buy. 
+*/
+ 
+public Map<Integer, Integer> cancel(); 
+
+/** Gives back total amount of money collected
+ * @return the total amount of money collected by the paystation 
+* since the last call and empties it, setting the total to zero. 
+*Note that money is only collected after a call to buy.
+*/
+public int empty();
 }

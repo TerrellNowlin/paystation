@@ -122,6 +122,7 @@ public class PayStationImplTest {
                 14, r.value());
         assertEquals("Again, display should be cleared",
                 0, ps.readDisplay());
+       
     }
 
     /**
